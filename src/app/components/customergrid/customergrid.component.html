@@ -1,4 +1,9 @@
-<table border="1" style="width: 100%">
+<!-- Display error message if there is an error -->
+<div *ngIf="error" style="color: red">
+  {{ error }}
+</div>
+
+<table border="1" style="width: 100%; border-collapse: collapse">
   <thead>
     <tr>
       <th>Autokey</th>
@@ -20,6 +25,7 @@
         <input
           *ngIf="editingCustomer === customer"
           [(ngModel)]="customer.lastName"
+          placeholder="Last Name"
         />
       </td>
       <td>
@@ -29,6 +35,7 @@
         <input
           *ngIf="editingCustomer === customer"
           [(ngModel)]="customer.firstName"
+          placeholder="First Name"
         />
       </td>
       <td>
@@ -38,6 +45,7 @@
         <input
           *ngIf="editingCustomer === customer"
           [(ngModel)]="customer.middleName"
+          placeholder="Middle Name"
         />
       </td>
       <td>
@@ -45,6 +53,7 @@
         <input
           *ngIf="editingCustomer === customer"
           [(ngModel)]="customer.address"
+          placeholder="Address"
         />
       </td>
       <td>
