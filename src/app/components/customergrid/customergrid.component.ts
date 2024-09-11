@@ -22,6 +22,7 @@ export class CustomergridComponent implements OnInit {
   getCustomers(): void {
     this.customerService.getCustomers().subscribe({
       next: (data: Customer[]) => {
+        console.log('Fetched customers:', data); // Debug statement
         this.customers = data;
       },
       error: (err) => {
@@ -30,6 +31,8 @@ export class CustomergridComponent implements OnInit {
       }
     });
   }
+  
+  
 
   // Add a new customer
   addCustomer(customer: Customer): void {
