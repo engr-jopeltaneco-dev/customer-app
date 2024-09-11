@@ -1,0 +1,94 @@
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2c2f33; /* Dark industrial background */
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #4b4f56; /* Metal-like border */
+    color: #f0f0f0; /* Light text */
+  }
+  
+  /* Header Styling */
+  th {
+    background-color: #6c757d; /* Industrial grey */
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Row Styling */
+  tbody tr:nth-child(odd) {
+    background-color: #3a3d42; /* Alternate row background */
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #2f3237;
+  }
+  
+  /* Editing State Styling */
+  input {
+    background-color: #3a3d42; /* Industrial style input */
+    border: 1px solid #4b4f56;
+    padding: 5px;
+    color: #f0f0f0;
+    border-radius: 4px;
+    width: 90%;
+  }
+  
+  input:focus {
+    border-color: #6c757d; /* Highlight on focus */
+    outline: none;
+  }
+  
+  /* Button Styling */
+  button {
+    background-color: #6c757d; /* Grey button */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    margin-right: 5px;
+  }
+  
+  button:hover {
+    background-color: #5a6268; /* Darker on hover */
+  }
+  
+  button:active {
+    background-color: #545b62;
+  }
+  
+  button:disabled {
+    background-color: #3a3d42;
+    color: #a9a9a9;
+    cursor: not-allowed;
+  }
+  
+  /* Action Buttons (Edit/Delete) */
+  td:last-child {
+    text-align: center;
+  }
+  
+  /* Highlight the row when editing */
+  tr.editing {
+    background-color: #5a6268; /* Highlight edited row */
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    th, td {
+      font-size: 14px;
+    }
+    button {
+      font-size: 12px;
+    }
+  }
+  

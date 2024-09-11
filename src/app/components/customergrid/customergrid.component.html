@@ -1,0 +1,68 @@
+<table border="1" style="width: 100%">
+  <thead>
+    <tr>
+      <th>Autokey</th>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Middle Name</th>
+      <th>Address</th>
+      <th>Birthdate</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers">
+      <td>{{ customer.autokey }}</td>
+      <td>
+        <span *ngIf="editingCustomer !== customer">{{
+          customer.lastName
+        }}</span>
+        <input
+          *ngIf="editingCustomer === customer"
+          [(ngModel)]="customer.lastName"
+        />
+      </td>
+      <td>
+        <span *ngIf="editingCustomer !== customer">{{
+          customer.firstName
+        }}</span>
+        <input
+          *ngIf="editingCustomer === customer"
+          [(ngModel)]="customer.firstName"
+        />
+      </td>
+      <td>
+        <span *ngIf="editingCustomer !== customer">{{
+          customer.middleName
+        }}</span>
+        <input
+          *ngIf="editingCustomer === customer"
+          [(ngModel)]="customer.middleName"
+        />
+      </td>
+      <td>
+        <span *ngIf="editingCustomer !== customer">{{ customer.address }}</span>
+        <input
+          *ngIf="editingCustomer === customer"
+          [(ngModel)]="customer.address"
+        />
+      </td>
+      <td>
+        <span *ngIf="editingCustomer !== customer">{{
+          customer.birthdate | date : "MM/dd/yyyy"
+        }}</span>
+        <input
+          *ngIf="editingCustomer === customer"
+          [(ngModel)]="customer.birthdate"
+          type="date"
+        />
+      </td>
+      <td>
+        <button (click)="saveChanges(customer)">
+          {{ editingCustomer === customer ? "Save" : "Edit" }}
+        </button>
+        <button (click)="deleteCustomer(customer.autokey)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

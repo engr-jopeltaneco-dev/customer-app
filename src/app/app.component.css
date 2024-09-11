@@ -1,0 +1,59 @@
+/* General Form Styling */
+form {
+    background-color: #2c2f33; /* Dark industrial background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Input fields */
+  input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #4b4f56; /* Metal-like border */
+    border-radius: 4px;
+    background-color: #3a3d42; /* Slightly lighter background */
+    color: #f0f0f0; /* Light text for contrast */
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #6c757d; /* Subtle highlight effect */
+    outline: none;
+  }
+  
+  /* Placeholder styling */
+  input::placeholder {
+    color: #adb5bd; /* Muted color for placeholder text */
+  }
+  
+  /* Submit Button */
+  button {
+    background-color: #6c757d; /* Industrial grey */
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #5a6268; /* Darker shade on hover */
+  }
+  
+  button:active {
+    background-color: #545b62;
+  }
+  
+  /* Form element spacing */
+  form input:last-of-type {
+    margin-bottom: 25px;
+  }
+  
