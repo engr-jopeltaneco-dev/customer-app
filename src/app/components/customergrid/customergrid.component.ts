@@ -64,15 +64,14 @@ export class CustomergridComponent implements OnInit {
     }
   }
   
-  deleteCustomer(autokey: number | undefined): void {
-    if (autokey !== undefined) {  // Ensure autokey is defined
-      this.customerService.deleteCustomer(autokey).subscribe(() => {
-        this.customers = this.customers.filter(c => c.autokey !== autokey);  // Remove customer from the grid
-      });
-    } else {
-      console.error('Cannot delete customer without a valid autokey');
-    }
+deleteCustomer(autokey: number | undefined): void {
+  if (autokey !== undefined) {  // Ensure autokey is defined
+    this.customerService.deleteCustomer(autokey).subscribe(() => {
+      this.customers = this.customers.filter(c => c.autokey !== autokey);  // Remove customer from the grid
+    });
+  } else {
+    console.error('Cannot delete customer without a valid autokey');
   }
-  
+}
   
 }
