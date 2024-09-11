@@ -15,9 +15,18 @@ export class CustomergridComponent implements OnInit {
   constructor(private customerService: CustomerService) { }
 
   ngOnInit(): void {
-    this.getCustomers();
+    this.customerService.getCustomers().subscribe(
+      (data) => {
+        this.customers = data;
+        console.log('Fetched customers:', data);
+      },
+      (error) => {
+        console.error('Error fetching customers:', error);
+        this.error = 'Failed to fetch customers';
+      }
+    );
   }
-
+  
   // Fetch all customers on component load
   getCustomers(): void {
     this.customerService.getCustomers().subscribe({
