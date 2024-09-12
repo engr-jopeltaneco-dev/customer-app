@@ -1,6 +1,6 @@
 <form (ngSubmit)="addCustomer()">
   <div>
-    <p style="color: rgb(255, 251, 0)" text-align: center *ngIf="errorMessage">
+    <p style="color: rgb(255, 251, 0)" *ngIf="errorMessage">
       {{ errorMessage }}
     </p>
   </div>
@@ -31,6 +31,7 @@
     placeholder="Address (min 10 chars)"
     required
     minlength="10"
+    maxlength="50"
   />
   <input
     type="date"

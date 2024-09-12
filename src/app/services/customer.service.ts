@@ -23,18 +23,10 @@ export class CustomerService {
   // Fetch all customers
   getCustomers(): Observable<Customer[]> {
     return this.http.get<Customer[]>(this.apiUrl).pipe(
-      map(response => {
-        console.log('Response:', response); // Debugging
-        return response;
-      }),
+      map(response => response),
       catchError(error => {
-        console.error('Error details:', {
-          status: error.status,
-          statusText: error.statusText,
-          message: error.message,
-          error: error.error
-        });
-        return of([]); // Return an empty array in case of error
+        console.error('Error fetching customers:', error.message);
+        return of([]);
       })
     );
   }
@@ -43,8 +35,8 @@ export class CustomerService {
   addCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.apiUrl, customer).pipe(
       catchError(error => {
-        console.error('Error adding customer:', error.message); // More specific error details
-        return throwError(() => new Error('Error adding customer')); // Customize the error message
+        console.error('Error adding customer:', error.message);
+        return throwError(() => new Error('Error adding customer'));
       })
     );
   }
@@ -53,8 +45,8 @@ export class CustomerService {
   searchCustomers(query: string): Observable<Customer[]> {
     return this.http.get<Customer[]>(`${this.apiUrl}/search?query=${query}`).pipe(
       catchError(error => {
-        console.error('Error searching customers:', error.message); // More specific error details
-        return of([]); // Return an empty array in case of error
+        console.error('Error searching customers:', error.message);
+        return of([]);
       })
     );
   }
@@ -73,8 +65,8 @@ export class CustomerService {
   deleteCustomer(autokey: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${autokey}`).pipe(
       catchError(error => {
-        console.error('Error deleting customer:', error.message); 
-        return throwError(() => new Error('Error deleting customer')); 
+        console.error('Error deleting customer:', error.message);
+        return throwError(() => new Error('Error deleting customer'));
       })
     );
   }

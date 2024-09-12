@@ -17,6 +17,7 @@ import { CustomerService } from './services/customer.service';
     HttpClientModule,
     FormsModule
   ],
-  providers: [CustomerService,provideHttpClient(withFetch())],
+  providers: [CustomerService, provideHttpClient(withFetch())],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
