@@ -16,7 +16,7 @@ export interface Customer {
   providedIn: 'root'
 })
 export class CustomerService {
-  private apiUrl = '/api/customers';  // Ensure this URL is correct
+  private apiUrl = 'http://localhost:5066/api/customers';  // Ensure this URL is correct
 
   constructor(private http: HttpClient) { }
 
