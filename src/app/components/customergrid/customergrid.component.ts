@@ -117,7 +117,7 @@ export class CustomergridComponent implements OnInit {
     if (!customer.lastName || !customer.firstName || !customer.middleName || !customer.address || !customer.birthdate) {
       return false;
     }
-    if (customer.address.length > 50) {
+    if (customer.address.length >= 50) {
       return false;
     }
     return true;

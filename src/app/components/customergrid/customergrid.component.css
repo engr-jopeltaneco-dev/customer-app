@@ -85,6 +85,7 @@ td:last-child {
 
 /* Search Input Styling */
 input[type="text"] {
+    text-align: center;
     background-color: #ffffff;
     border: 1px solid #cccccc;
     padding: 8px;
