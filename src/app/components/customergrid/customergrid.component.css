@@ -1,11 +1,3 @@
-/* Import Google Poppins font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-
-/* Apply Poppins font globally */
-* {
-    font-family: 'Poppins', sans-serif;
-}
-
 /* Error Message Styling */
 div[style="color: red"] {
     color: #d9534f; /* Red for error message */
