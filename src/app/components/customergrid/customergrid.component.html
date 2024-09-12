@@ -33,7 +33,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let customer of customers; let i = index">
+    <tr *ngFor="let customer of customers">
       <td>{{ customer.autokey }}</td>
       <td>
         <!-- Toggle between text and input for Last Name -->
@@ -96,10 +96,10 @@
       </td>
       <td>
         <!-- Button to toggle between Edit and Save mode -->
-        <button (click)="toggleEdit(customers[i])">
-          {{ editingCustomer === customers[i] ? "Save" : "Edit" }}
+        <button (click)="toggleEdit(customer)">
+          {{ editingCustomer === customer ? "Save" : "Edit" }}
         </button>
-        <button (click)="deleteCustomer(customers[i].autokey)">Delete</button>
+        <button (click)="deleteCustomer(customer.autokey)">Delete</button>
       </td>
     </tr>
   </tbody>

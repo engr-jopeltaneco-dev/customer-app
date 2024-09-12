@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   addCustomer() {
     this.errorMessage = ''; // Reset error message
     if (!this.validateForm()) {
-      alert(this.errorMessage); // Show error message in a popup
+      this.errorMessage = 'Form is invalid. Please check the fields.'; // Update error message
       return; // If form is invalid, don't add customer
     }
     this.customerService.addCustomer(this.newCustomer).subscribe(() => {

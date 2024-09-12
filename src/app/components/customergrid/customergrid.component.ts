@@ -1,3 +1,4 @@
+// customergrid.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CustomerService, Customer } from '../../services/customer.service'; // Update path if necessary
 
@@ -51,38 +52,36 @@ export class CustomergridComponent implements OnInit {
 
   // Toggle between Edit and Save mode
   toggleEdit(customer: Customer): void {
-    if (customer) {
-      if (this.editingCustomer === customer) {
-        // Save the changes
-        this.savingCustomer = customer;
-        if (this.validateCustomer(customer)) {
-          if (this.checkDuplicateName(customer)) {
-            alert('Duplicate name cannot be saved.');
-            return;
-          }
-          this.customerService.editCustomer(customer).subscribe({
-            next: (updatedCustomer: Customer) => {
-              const index = this.customers.findIndex(c => c.autokey === updatedCustomer.autokey);
-              if (index !== -1) {
-                this.customers[index] = updatedCustomer; // Update customer data
-              }
-            },
-            error: (err) => {
-              console.error('Error updating customer:', err);
-              this.error = 'Failed to update customer. Please try again later.';
-            },
-            complete: () => {
-              this.savingCustomer = null;
-              this.editingCustomer = null; // Reset editingCustomer to null after save operation
-            }
-          });
-        } else {
-          alert('Please fill in all required fields and ensure the birthdate is valid.');
+    if (this.editingCustomer === customer) {
+      // Save the changes
+      this.savingCustomer = customer;
+      if (this.validateCustomer(customer)) {
+        if (this.checkDuplicateName(customer)) {
+          alert('Duplicate name cannot be saved.');
+          return;
         }
+        this.customerService.editCustomer(customer).subscribe({
+          next: (updatedCustomer: Customer) => {
+            const index = this.customers.findIndex(c => c.autokey === updatedCustomer.autokey);
+            if (index !== -1) {
+              this.customers[index] = updatedCustomer; // Update customer data
+            }
+          },
+          error: (err) => {
+            console.error('Error updating customer:', err);
+            this.error = 'Failed to update customer. Please try again later.';
+          },
+          complete: () => {
+            this.savingCustomer = null;
+            this.editingCustomer = null; // Reset editingCustomer to null after save operation
+          }
+        });
       } else {
-        // Enter edit mode
-        this.editingCustomer = customer;
+        alert('Please fill in all required fields and ensure the birthdate is valid. Address should not exceed 50 characters.');
       }
+    } else {
+      // Enter edit mode
+      this.editingCustomer = customer;
     }
   }
 
@@ -91,7 +90,7 @@ export class CustomergridComponent implements OnInit {
     if (autokey !== undefined) {
       this.customerService.deleteCustomer(autokey).subscribe({
         next: () => {
-          this.customers = this.customers.filter(c => c.autokey !== autokey); // Remove customer from grid
+          this.getCustomers(); // Reload the customers list from the database
         },
         error: (err) => {
           console.error('Error deleting customer:', err);
@@ -116,6 +115,9 @@ export class CustomergridComponent implements OnInit {
 
   validateCustomer(customer: Customer): boolean {
     if (!customer.lastName || !customer.firstName || !customer.middleName || !customer.address || !customer.birthdate) {
+      return false;
+    }
+    if (customer.address.length > 50) {
       return false;
     }
     return true;
