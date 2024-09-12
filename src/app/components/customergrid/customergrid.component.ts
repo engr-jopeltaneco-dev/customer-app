@@ -1,6 +1,5 @@
-// customergrid.component.ts
 import { Component, OnInit } from '@angular/core';
-import { CustomerService, Customer } from '../../services/customer.service'; 
+import { CustomerService, Customer } from '../../services/customer.service'; // Update path if necessary
 
 @Component({
   selector: 'app-customergrid',
@@ -8,12 +7,12 @@ import { CustomerService, Customer } from '../../services/customer.service';
   styleUrls: ['./customergrid.component.css']
 })
 export class CustomergridComponent implements OnInit {
-  customers: Customer[] = [];  
-  editingCustomer: Customer | null = null;
-  savingCustomer: Customer | null = null;
-  searchQuery: string = '';  
-  error: string | null = null;  
-  errorMessage: string | null = null;  
+  customers: Customer[] = [];  // Array of customers
+  editingCustomer: Customer | null = null;  // Customer currently being edited
+  savingCustomer: Customer | null = null;  // Customer being saved
+  searchQuery: string = '';  // Query for searching customers
+  error: string | null = null;  // To display any error messages
+  errorMessage: string | null = null;  // To display error messages for duplicate names
 
   constructor(private customerService: CustomerService) { }
 
@@ -21,6 +20,7 @@ export class CustomergridComponent implements OnInit {
     this.getCustomers();
   }
 
+  // Fetch all customers on component load
   getCustomers(): void {
     this.customerService.getCustomers().subscribe({
       next: (data: Customer[]) => {
@@ -49,40 +49,44 @@ export class CustomergridComponent implements OnInit {
     }
   }
 
-  //Edit and Save mode
+  // Toggle between Edit and Save mode
   toggleEdit(customer: Customer): void {
-    if (this.editingCustomer === customer) {
-      // Save the changes
-      this.savingCustomer = customer;
-      if (this.validateCustomer(customer)) {
-        if (this.checkDuplicateName(customer)) {
-          alert('Duplicate name cannot be saved.');
-          return;
-        }
-        this.customerService.editCustomer(customer).subscribe({
-          next: (updatedCustomer: Customer) => {
-            const index = this.customers.findIndex(c => c.autokey === updatedCustomer.autokey);
-            if (index !== -1) {
-              this.customers[index] = updatedCustomer; // Update customer data
-            }
-          },
-          error: (err) => {
-            console.error('Error updating customer:', err);
-            this.error = 'Failed to update customer. Please try again later.';
-          },
-          complete: () => {
-            this.savingCustomer = null;
-            this.editingCustomer = null; 
+    if (customer) {
+      if (this.editingCustomer === customer) {
+        // Save the changes
+        this.savingCustomer = customer;
+        if (this.validateCustomer(customer)) {
+          if (this.checkDuplicateName(customer)) {
+            alert('Duplicate name cannot be saved.');
+            return;
           }
-        });
+          this.customerService.editCustomer(customer).subscribe({
+            next: (updatedCustomer: Customer) => {
+              const index = this.customers.findIndex(c => c.autokey === updatedCustomer.autokey);
+              if (index !== -1) {
+                this.customers[index] = updatedCustomer; // Update customer data
+              }
+            },
+            error: (err) => {
+              console.error('Error updating customer:', err);
+              this.error = 'Failed to update customer. Please try again later.';
+            },
+            complete: () => {
+              this.savingCustomer = null;
+              this.editingCustomer = null; // Reset editingCustomer to null after save operation
+            }
+          });
+        } else {
+          alert('Please fill in all required fields and ensure the birthdate is valid.');
+        }
       } else {
-        alert('Please fill in all required fields and ensure the birthdate is valid.');
+        // Enter edit mode
+        this.editingCustomer = customer;
       }
-    } else {
-      this.editingCustomer = customer;
     }
   }
 
+  // Delete customer
   deleteCustomer(autokey: number | undefined): void {
     if (autokey !== undefined) {
       this.customerService.deleteCustomer(autokey).subscribe({
@@ -100,6 +104,7 @@ export class CustomergridComponent implements OnInit {
     }
   }
 
+  // Check for duplicate name
   checkDuplicateName(customer: Customer): boolean {
     const duplicateCustomer = this.customers.find(c => c.autokey !== customer.autokey && c.lastName === customer.lastName && c.firstName === customer.firstName && c.middleName === customer.middleName);
     if (duplicateCustomer) {

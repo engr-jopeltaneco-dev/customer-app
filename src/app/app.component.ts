@@ -10,13 +10,13 @@ export class AppComponent implements OnInit {
   title = 'customer-app';
   customers: Customer[] = [];
   newCustomer: Customer = { lastName: '', firstName: '', middleName: '', address: '', birthdate: null };
-  errorMessage: string = ''; 
+  errorMessage: string = ''; // Add an error message variable
 
   constructor(private customerService: CustomerService) { }
 
   ngOnInit() {
     this.customerService.getCustomers().subscribe(customers => {
-      console.log(customers); 
+      console.log(customers);  // Log the customers to see what's being returned
       this.customers = customers;
     });
   }
@@ -36,10 +36,10 @@ export class AppComponent implements OnInit {
   }
 
   addCustomer() {
-    this.errorMessage = '';
+    this.errorMessage = ''; // Reset error message
     if (!this.validateForm()) {
-      alert(this.errorMessage); 
-      return;
+      alert(this.errorMessage); // Show error message in a popup
+      return; // If form is invalid, don't add customer
     }
     this.customerService.addCustomer(this.newCustomer).subscribe(() => {
       this.loadCustomers();
@@ -83,12 +83,12 @@ export class AppComponent implements OnInit {
   }
 
   preFillForm(customer: Customer) {
-    this.newCustomer = { ...customer }; 
+    this.newCustomer = { ...customer }; // Creates a copy of the selected customer
   }
 
   editCustomer(customer: Customer) {
     this.customerService.editCustomer(customer).subscribe(() => {
-      this.loadCustomers();
+      this.loadCustomers(); // Reload the list after edit
       this.newCustomer = { lastName: '', firstName: '', middleName: '', address: '', birthdate: null }; // Reset the form
     });
   }
@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
   deleteCustomer(autokey: number | undefined) {
     if (autokey !== undefined) {
       this.customerService.deleteCustomer(autokey).subscribe(() => {
-        this.loadCustomers(); 
+        this.loadCustomers(); // Reload the list after delete
       });
     } else {
       console.error('Customer autokey is undefined!');

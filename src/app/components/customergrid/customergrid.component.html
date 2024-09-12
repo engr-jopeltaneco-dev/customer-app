@@ -1,7 +1,14 @@
+<!-- Display error message if there is an error -->
+<div *ngIf="error" style="color: red">
+  {{ error }}
+</div>
+
+<!-- Display error message if there is a duplicate name -->
 <div *ngIf="errorMessage" style="color: red">
   {{ errorMessage }}
 </div>
 
+<!-- Search bar on the top right -->
 <div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
   <input
     type="text"
@@ -26,9 +33,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let customer of customers">
+    <tr *ngFor="let customer of customers; let i = index">
       <td>{{ customer.autokey }}</td>
       <td>
+        <!-- Toggle between text and input for Last Name -->
         <span *ngIf="editingCustomer !== customer">{{
           customer.lastName
         }}</span>
@@ -40,6 +48,7 @@
         />
       </td>
       <td>
+        <!-- Toggle between text and input for First Name -->
         <span *ngIf="editingCustomer !== customer">{{
           customer.firstName
         }}</span>
@@ -51,6 +60,7 @@
         />
       </td>
       <td>
+        <!-- Toggle between text and input for Middle Name -->
         <span *ngIf="editingCustomer !== customer">{{
           customer.middleName
         }}</span>
@@ -62,6 +72,7 @@
         />
       </td>
       <td>
+        <!-- Toggle between text and input for Address -->
         <span *ngIf="editingCustomer !== customer">{{ customer.address }}</span>
         <input
           *ngIf="editingCustomer === customer"
@@ -72,6 +83,7 @@
         />
       </td>
       <td>
+        <!-- Toggle between text and input for Birthdate -->
         <span *ngIf="editingCustomer !== customer">{{
           customer.birthdate | date : "MM/dd/yyyy"
         }}</span>
@@ -83,10 +95,11 @@
         />
       </td>
       <td>
-        <button (click)="toggleEdit(customer)">
-          {{ editingCustomer === customer ? "Save" : "Edit" }}
+        <!-- Button to toggle between Edit and Save mode -->
+        <button (click)="toggleEdit(customers[i])">
+          {{ editingCustomer === customers[i] ? "Save" : "Edit" }}
         </button>
-        <button (click)="deleteCustomer(customer.autokey)">Delete</button>
+        <button (click)="deleteCustomer(customers[i].autokey)">Delete</button>
       </td>
     </tr>
   </tbody>

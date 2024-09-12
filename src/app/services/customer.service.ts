@@ -63,8 +63,8 @@ export class CustomerService {
   editCustomer(customer: Customer): Observable<Customer> {
     return this.http.put<Customer>(`${this.apiUrl}/${customer.autokey}`, customer).pipe(
       catchError(error => {
-        console.error('Error editing customer:', error.message); // More specific error details
-        return throwError(() => new Error('Error editing customer')); // Customize the error message
+        console.error('Error editing customer:', error.message);
+        return throwError(() => new Error('Error editing customer'));
       })
     );
   }
@@ -73,8 +73,8 @@ export class CustomerService {
   deleteCustomer(autokey: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${autokey}`).pipe(
       catchError(error => {
-        console.error('Error deleting customer:', error.message); // More specific error details
-        return throwError(() => new Error('Error deleting customer')); // Customize the error message
+        console.error('Error deleting customer:', error.message); 
+        return throwError(() => new Error('Error deleting customer')); 
       })
     );
   }
