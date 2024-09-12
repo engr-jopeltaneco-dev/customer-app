@@ -1,60 +1,54 @@
-/* Error Message Styling */
-div[style="color: red"] {
-    color: #d9534f; /* Red for error message */
-    font-weight: bold;
-}
-
 /* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #1e2a38; /* Dark blue industrial background */
+    background-color: #e1e7ed; 
     margin-top: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif; 
+    font-size: 16px;
 }
 
 th, td {
     padding: 12px;
-    text-align: left;
-    border: 1px solid #6c757d; /* Border for table cells */
-    color: #ffffff; /* White text for better readability */
+    text-align: center;
+    border: 1px solid #b0b9c3;
+    color: #2d3e50; 
 }
 
-/* Header Styling */
+
 th {
-    background-color: #4a6572; /* Blueish header */
+    background-color: #62788e; 
     font-weight: bold;
     text-transform: uppercase;
-    color: #ffffff;
 }
 
-/* Row Styling */
 tbody tr:nth-child(odd) {
-    background-color: #2b3e50; /* Slightly darker blue */
+    background-color: #d0d8df;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #1e2a38; /* Darker blue background */
+    background-color: #e1e7ed;
 }
 
-/* Editing State Styling */
+/* Input Styling */
 input {
-    background-color: #4a6572; /* Blue input background */
-    border: 1px solid #6c757d;
+    background-color: #c7d3e1;
+    border: 1px solid #6c7c8d;
     padding: 5px;
-    color: #ffffff;
+    color: #2d3e50;
     border-radius: 4px;
     width: 90%;
 }
 
 input:focus {
-    border-color: #56c596; /* Green border on focus */
+    border-color: #4f6d8e;
     outline: none;
 }
 
 /* Button Styling */
 button {
-    background-color: #4a6572; /* Blue button */
+    background-color: #62788e; /* Blue button */
     color: #ffffff;
     border: none;
     padding: 8px 12px;
@@ -63,70 +57,52 @@ button {
     font-size: 14px;
     transition: background-color 0.3s ease;
     margin-right: 5px;
+    display: inline-block;
 }
 
 button:hover {
-    background-color: #34495e; /* Darker blue on hover */
-}
-
-button:active {
-    background-color: #2b3e50;
+    background-color: #3e5b78;
 }
 
 button:disabled {
-    background-color: #3a3d42;
-    color: #a9a9a9;
+    background-color: #9aa5b1;
+    color: #ffffff;
     cursor: not-allowed;
 }
 
 /* Edit & Delete Buttons Styling */
 button:nth-child(1) {
-    background-color: #3a7f40; /* Dark green for edit */
-    color: #ffffff;
-}
-
-button:nth-child(1):hover {
-    background-color: #2c5f30; /* Darker green on hover */
+    background-color: #5a8e5e;
 }
 
 button:nth-child(2) {
-    background-color: #a94442; /* Dark red for delete */
-    color: #ffffff;
-}
-
-button:nth-child(2):hover {
-    background-color: #872f2b; /* Darker red on hover */
+    background-color: #b24842;
 }
 
 td:last-child {
     text-align: center;
 }
 
-/* Highlight the row when editing */
-tr.editing {
-    background-color: #ffcc00; /* Yellow highlight for editing */
-}
-
 /* Search Input Styling */
 input[type="text"] {
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff;
     border: 1px solid #cccccc;
     padding: 8px;
     width: 200px;
     border-radius: 4px;
-    color: #333333;
+    color: #2d3e50;
 }
 
-input[type="text"]::placeholder {
-    color: #999999; /* Light gray for placeholder text */
-}
+input::placeholder {
+    color: #135e70; 
+  }
 
 input[type="text"]:focus {
-    border-color: #56c596; /* Green border on focus */
+    border-color: #4f6d8e; 
     outline: none;
 }
 
-/* Responsive Styling */
+
 @media (max-width: 768px) {
     th, td {
         font-size: 14px;
@@ -135,6 +111,6 @@ input[type="text"]:focus {
         font-size: 12px;
     }
     input[type="text"] {
-        width: 100%; /* Full width search input on small screens */
+        width: 100%;
     }
 }

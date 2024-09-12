@@ -4,20 +4,19 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { CustomergridComponent } from './components/customergrid/customergrid.component'; // Correct import path
-import { CustomerService } from './services/customer.service';  // Import CustomerService
+import { CustomergridComponent } from './components/customergrid/customergrid.component'; 
+import { CustomerService } from './services/customer.service'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomergridComponent  // Declare the new component
+    CustomergridComponent  
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule
   ],
-  providers: [CustomerService,provideHttpClient(withFetch())],  // Add CustomerService to providers
-  bootstrap: [AppComponent]
+  providers: [CustomerService,provideHttpClient(withFetch())],
 })
 export class AppModule { }

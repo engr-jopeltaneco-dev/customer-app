@@ -1,9 +1,7 @@
-<!-- Display error message if there is an error -->
-<div *ngIf="error" style="color: red">
-  {{ error }}
+<div *ngIf="errorMessage" style="color: red">
+  {{ errorMessage }}
 </div>
 
-<!-- Search bar on the top right -->
 <div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
   <input
     type="text"
@@ -36,8 +34,9 @@
         }}</span>
         <input
           *ngIf="editingCustomer === customer"
-          [(ngModel)]="customer.lastName"
+          [(ngModel)]="editingCustomer.lastName"
           placeholder="Last Name"
+          required
         />
       </td>
       <td>
@@ -46,8 +45,9 @@
         }}</span>
         <input
           *ngIf="editingCustomer === customer"
-          [(ngModel)]="customer.firstName"
+          [(ngModel)]="editingCustomer.firstName"
           placeholder="First Name"
+          required
         />
       </td>
       <td>
@@ -56,16 +56,19 @@
         }}</span>
         <input
           *ngIf="editingCustomer === customer"
-          [(ngModel)]="customer.middleName"
+          [(ngModel)]="editingCustomer.middleName"
           placeholder="Middle Name"
+          required
         />
       </td>
       <td>
         <span *ngIf="editingCustomer !== customer">{{ customer.address }}</span>
         <input
           *ngIf="editingCustomer === customer"
-          [(ngModel)]="customer.address"
+          [(ngModel)]="editingCustomer.address"
           placeholder="Address"
+          required
+          maxlength="50"
         />
       </td>
       <td>
@@ -74,12 +77,13 @@
         }}</span>
         <input
           *ngIf="editingCustomer === customer"
-          [(ngModel)]="customer.birthdate"
+          [(ngModel)]="editingCustomer.birthdate"
           type="date"
+          required
         />
       </td>
       <td>
-        <button (click)="saveChanges(customer)">
+        <button (click)="toggleEdit(customer)">
           {{ editingCustomer === customer ? "Save" : "Edit" }}
         </button>
         <button (click)="deleteCustomer(customer.autokey)">Delete</button>

@@ -1,4 +1,9 @@
 <form (ngSubmit)="addCustomer()">
+  <div>
+    <p style="color: rgb(255, 251, 0)" text-align: center *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+  </div>
   <input
     type="text"
     [(ngModel)]="newCustomer.lastName"
