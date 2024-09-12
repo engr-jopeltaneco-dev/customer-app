@@ -14,17 +14,9 @@ export class CustomergridComponent implements OnInit {
 
   constructor(private customerService: CustomerService) { }
 
+  
   ngOnInit(): void {
-    this.customerService.getCustomers().subscribe(
-      (data) => {
-        this.customers = data;
-        console.log('Fetched customers:', data);
-      },
-      (error) => {
-        console.error('Error fetching customers:', error);
-        this.error = 'Failed to fetch customers';
-      }
-    );
+    this.getCustomers();
   }
   
   // Fetch all customers on component load
@@ -93,11 +85,22 @@ export class CustomergridComponent implements OnInit {
 
   // Save changes (used when switching between Edit and Save modes)
   saveChanges(customer: Customer): void {
-    if (this.editingCustomer) {
-      // Call edit method if a customer is being edited
-      this.editCustomer(customer);
+    if (this.editingCustomer && this.editingCustomer.autokey === customer.autokey) {
+      // Save the customer
+      this.customerService.editCustomer(customer).subscribe({
+        next: (updatedCustomer: Customer) => {
+          const index = this.customers.findIndex(c => c.autokey === updatedCustomer.autokey);
+          if (index !== -1) {
+            this.customers[index] = updatedCustomer;
+          }
+          this.editingCustomer = null;  // Exit edit mode after saving
+        },
+        error: (err) => {
+          this.error = 'Failed to update customer. Please try again later.';
+        }
+      });
     } else {
-      // Enter edit mode for the customer
+      // Enter edit mode
       this.editingCustomer = customer;
     }
   }

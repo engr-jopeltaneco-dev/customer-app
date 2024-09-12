@@ -3,6 +3,18 @@
   {{ error }}
 </div>
 
+<!-- Search bar on the top right -->
+<div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (input)="searchCustomers()"
+    placeholder="Search customers..."
+    style="padding: 5px; width: 200px"
+  />
+</div>
+
+<!-- Customer grid -->
 <table border="1" style="width: 100%; border-collapse: collapse">
   <thead>
     <tr>
